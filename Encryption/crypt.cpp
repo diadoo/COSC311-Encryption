@@ -3,13 +3,13 @@
 Encrypt::Encrypt(void) {
 	//we need to create all of the key information when the class is constructed
 	//using 3 and 7 for testing right now
-	p = 313;
-	q = 733;
+	p = 5;
+	q = 11;
 	modulus = p*q;
 	totient = (p - 1)*(q - 1);
 	//we need code here to get the private key
 	// public key * private key = 1 mod totient like the example
-	priKey = gcdExtended(pubKey, totient, &x, &y);
+	priKey = gcdExtended(totient, pubKey, &x, &y);
 }
 
 // C function for extended Euclidean Algorithm
