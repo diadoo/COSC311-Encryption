@@ -26,8 +26,7 @@ public:
 	int priKey; //Private key we need to move this to private after testing
 private:
 	int p, q; // we need to set these here to our two three digit primes
-	int x, y; //for extended gcd only
 	int modulus;
 	int totient;
-	int gcdExtended(int a, int b, int *x, int *y);
+	int gcdExtended(int n, int phi);
 };

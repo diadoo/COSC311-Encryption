@@ -9,30 +9,24 @@ Encrypt::Encrypt(void) {
 	totient = (p - 1)*(q - 1);
 	//we need code here to get the private key
 	// public key * private key = 1 mod totient like the example
-	priKey = gcdExtended(totient, pubKey, &x, &y);
+	priKey = gcdExtended(pubKey, totient);
 }
 
 // C function for extended Euclidean Algorithm
 //http://www.geeksforgeeks.org/basic-and-extended-euclidean-algorithms/
-int Encrypt::gcdExtended(int a, int b, int *x, int *y)
+int Encrypt::gcdExtended(int n, int phi)
 {
-	// Base Case
-	if (a == 0)
+	int r = 1;
+	for (int i = 1; i < phi; i++)
 	{
-		*x = 0;
-		*y = 1;
-		return b;
+		if ((i * n) % phi == 1)
+		{
+			r = i;
+			break;
+		}
 	}
-
-	int x1, y1; // To store results of recursive call
-	int gcd = gcdExtended(b%a, a, &x1, &y1);
-
-	// Update x and y using results of recursive
-	// call
-	*x = y1 - (b / a) * x1;
-	*y = x1;
-
-	return gcd;
+	cout << "d is " << r << endl;
+	return r;
 }
 
 void Encrypt::read(string fileName) {
