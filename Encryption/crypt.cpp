@@ -8,25 +8,17 @@ Encrypt::Encrypt(void) {
 	modulus = p*q;
 	totient = (p - 1)*(q - 1);
 	//we need code here to get the private key
-	// public key * private key = 1 mod totient like the example
-	priKey = gcdExtended(pubKey, totient);
+	// the pvt key isnt working
+	priKey = gcd(pubKey, totient);
 }
 
 // C function for extended Euclidean Algorithm
 //http://www.geeksforgeeks.org/basic-and-extended-euclidean-algorithms/
-int Encrypt::gcdExtended(int n, int phi)
-{
-	int r = 1;
-	for (int i = 1; i < phi; i++)
-	{
-		if ((i * n) % phi == 1)
-		{
-			r = i;
-			break;
-		}
-	}
-	cout << "d is " << r << endl;
-	return r;
+int Encrypt::gcd(int a, int b){
+	if (b == 0)
+		return a;
+
+	return gcd(b, a % b);
 }
 
 void Encrypt::read(string fileName) {

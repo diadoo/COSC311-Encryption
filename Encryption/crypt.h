@@ -28,5 +28,5 @@ private:
 	int p, q; // we need to set these here to our two three digit primes
 	int modulus;
 	int totient;
-	int gcdExtended(int n, int phi);
+	int gcd(int a, int b);
 };
