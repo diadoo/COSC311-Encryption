@@ -15,17 +15,18 @@ public:
 	vector<int> fromFile; //the message
 	vector<int> decryptedMessage;
 	vector<int> encryptedMessage;
-	//set to 19 as the global rule -Tom we have it set to read in public key from inline parameters
-	int pubKey; //Public key
+	int pubKey; //Public key. This is set from the command line
 	void read(string fileName);  //read from a file
-	void encrypt(); //encryption with P and Q, print to standard out
-	void decrypt(); //decrypt method, print to standard out
-	void printDecMessage(vector<int> passedMessage);
-	void printASCIIMessage(vector<int> passedMessage);
-	void saveMessageToFile(vector<int> saveMessage);
-	int priKey; //Private key we need to move this to private after testing
+	void encrypt(); //encryption method
+	void decrypt(); //decrypt method
+	void printDecMessage(vector<int> passedMessage); //print the message in ints
+	void printASCIIMessage(vector<int> passedMessage); //print the string message
+	void saveMessageToFile(vector<int> saveMessage);//save the message to a file in ints
+	int priKey; //Private key we need to move this to private after testing 
+	//i have the pvt key here so i can print it to the command line for testing atm
 private:
-	int p, q; // we need to set these here to our two three digit primes
+	//all of these are set in the constructor
+	int p, q; 
 	int modulus;
 	int totient;
 	int gcd(int a, int b);
