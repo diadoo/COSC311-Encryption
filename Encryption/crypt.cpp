@@ -76,7 +76,7 @@ void Encrypt::decrypt() {
 				calc = calc % modulus;
 				if( (calc <= 'z' && calc >='a') || calc == ' ')//still a valid message
 				{
-					decryptedMessage.push_back(calc % modulus);
+					decryptedMessage.push_back(calc);
 				}
 				else//it isnt a message;
 				{
