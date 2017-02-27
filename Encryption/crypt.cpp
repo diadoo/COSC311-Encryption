@@ -2,7 +2,7 @@
 
 Encrypt::Encrypt(void) {
 	//the key information is created here when the class is constructed
-
+	vector<int> primes = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997 };
 	//switch p and q to some random large prime
 	//using 5 and 11 for testing right now
 	p = 5;
@@ -65,13 +65,33 @@ void Encrypt::decrypt() {
 	//this function encrypts the message and saves it to decryptedMessage
 	//this is the form c^d mod n as shown in the notes
 	unsigned long long int calc = 0;
-	for (int i = 0; i < fromFile.size(); ++i) {
-		//c^d
-		calc = pow(fromFile[i], priKey);
-		//mod n
-		decryptedMessage.push_back(calc % modulus);
+	int i,j;
+	for(i=0;i<primes.size();i++)
+	{
+		if((primes[i]*pubKey % totient) == 1)//the key is a potential private key
+		{
+			for (j=0; j < fromFile.size(); j++) 
+			{
+				calc = (int) pow((double) fromFile[i], (double) primes[i]);
+				calc = calc % modulus;
+				if( (calc <= 'z' && calc >='a') || calc == ' ')//still a valid message
+				{
+					decryptedMessage.push_back(calc % modulus);
+				}
+				else//it isnt a message;
+				{
+					decryptedMessage.resize(0);
+					break;
+				}
+			}
+			if(decryptedMessage.size() != 0)
+			{
+				for (j=0; j < decryptedMessage.size(); j++)
+				{printf("%c",decryptedMessage[j]);}
+				printf("\n");
+			}
+		}
 	}
-
 }
 
 void Encrypt::printDecMessage(vector<int> passedMessage) {
