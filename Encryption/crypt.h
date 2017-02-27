@@ -11,7 +11,12 @@ using namespace std;
 
 class Encrypt{
 public:
+	
 	Encrypt();
+	
+	//all of the possible prime numbers <999
+	vector<int> primes;
+
 	vector<int> fromFile; //the message
 	vector<int> decryptedMessage;
 	vector<int> encryptedMessage;
