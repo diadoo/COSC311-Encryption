@@ -84,12 +84,7 @@ void Encrypt::decrypt() {
 					break;
 				}
 			}
-			if(decryptedMessage.size() != 0)
-			{
-				for (j=0; j < decryptedMessage.size(); j++)
-				{printf("%c",decryptedMessage[j]);}
-				printf("\n");
-			}
+			this.printDecMessage(decryptedMessage);
 		}
 	}
 }
