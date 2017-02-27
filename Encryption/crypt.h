@@ -15,6 +15,7 @@ public:
 	vector<int> fromFile; //the message
 	vector<int> decryptedMessage;
 	vector<int> encryptedMessage;
+	vector<int> primes;
 	int pubKey; //Public key. This is set from the command line
 	void read(string fileName);  //read from a file
 	void encrypt(); //encryption method
